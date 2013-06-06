@@ -23,7 +23,7 @@ bool FDTinyXML2::init()
 		m_sFilePath = CCFileUtils::sharedFileUtils()->fullPathForFilename(XML_FILE_NAME);
 	}else
 	{
-        m_sFilePath = CCFileUtils::sharedFileUtils()->getWritablePath()  + XML_FILE_NAME;
+       		 m_sFilePath = CCFileUtils::sharedFileUtils()->getWritablePath()  + XML_FILE_NAME;
 	}
     return true;
 }
@@ -48,22 +48,15 @@ bool FDTinyXML2::readXMLToArray(cocos2d::CCArray *&array,cocos2d::CCArray *&arra
     CCLog("%s",m_sFilePath.c_str());
     bool bRet = false;
     
-    if (isXMLFileExist()) {
-        
-        do {
-            
-            tinyxml2::XMLDocument *xmlDoc = new tinyxml2::XMLDocument();
-            
-            //            const XMLAttribute *curAttribute = NULL;
-            
-            unsigned long nSize;
-            
+    if (isXMLFileExist()) {    
+        do {           
+            tinyxml2::XMLDocument *xmlDoc = new tinyxml2::XMLDocument();           
+            //            const XMLAttribute *curAttribute = NULL;          
+            unsigned long nSize;           
             const char* xmlBuffer = (const char*)CCFileUtils::sharedFileUtils()->getFileData(m_sFilePath.c_str(), "rb", &nSize);
             
-            if (NULL == xmlBuffer) {
-                
+            if (NULL == xmlBuffer) {               
                 return false;
-                
             }
             
             xmlDoc->Parse(xmlBuffer);
@@ -72,10 +65,8 @@ bool FDTinyXML2::readXMLToArray(cocos2d::CCArray *&array,cocos2d::CCArray *&arra
             
             XMLElement *rootNode = xmlDoc->RootElement();
             
-            if (NULL == rootNode) {
-                
+            if (NULL == rootNode) {   
                 return false;
-                
             }
             
             // first element
@@ -83,31 +74,22 @@ bool FDTinyXML2::readXMLToArray(cocos2d::CCArray *&array,cocos2d::CCArray *&arra
             XMLElement *firstNode = rootNode->FirstChildElement();
             
             if (NULL == firstNode) {
-                
                 return false;
-                
             }
             
             XMLElement *subFirstNode = firstNode->FirstChildElement();
             
             if (NULL == subFirstNode) {
-                
                 return false;
-                
             }
             
             
             
             if (strncmp(firstNode->Name(),XML_FIRST_NODE,strlen(XML_FIRST_NODE)) == 0)  {
-                
                 groundNodeToArray(subFirstNode,array);
-                
             }else if (strncmp(firstNode->Name(),XML_SECOND_NODE,strlen(XML_SECOND_NODE)) == 0)
-                
             {
-                
                 eleNodeToArray(subFirstNode, array1);
-                
             }
             
             // next element
@@ -115,45 +97,31 @@ bool FDTinyXML2::readXMLToArray(cocos2d::CCArray *&array,cocos2d::CCArray *&arra
             XMLElement *secondNode = firstNode->NextSiblingElement();
             
             if (NULL == secondNode) {
-                
                 return true;
-                
             }
             
             XMLElement *subSecondNode = secondNode->FirstChildElement();
             
             if (NULL == subSecondNode) {
-                
                 return true;
-                
             }
             
             
             
             if (strncmp(secondNode->Name(),XML_FIRST_NODE,strlen(XML_FIRST_NODE)) == 0)  {
-                
                 groundNodeToArray(subSecondNode,array);
-                
             }else if (strncmp(secondNode->Name(),XML_SECOND_NODE,strlen(XML_SECOND_NODE)) == 0)
-                
             {
-                
-                eleNodeToArray(subSecondNode, array1);
-                
+                eleNodeToArray(subSecondNode, array1);  
             }
             
         } while (0);
-        
-        
-        
+               
         bRet = true;
         
-    }else
-        
-    {
-        
-        bRet = false;
-        
+    }else    
+    { 
+        bRet = false;  
     }
     
     return bRet;
@@ -161,7 +129,6 @@ bool FDTinyXML2::readXMLToArray(cocos2d::CCArray *&array,cocos2d::CCArray *&arra
 
 
 void FDTinyXML2::groundNodeToArray(XMLElement *ground,CCArray *&array)
-
 {
     
     const XMLAttribute *curAttribute = NULL;
@@ -171,13 +138,10 @@ void FDTinyXML2::groundNodeToArray(XMLElement *ground,CCArray *&array)
     GroundBarrierStruct groundStruct;
     
     while (NULL != ground) {
-        
         curAttribute = ground->FirstAttribute();
         
         if (strncmp(curAttribute->Name(), XML_POSX,strlen(XML_POSX)) == 0)  {
-            
             groundStruct.posx = atof(curAttribute->Value());
-            
         }
         
         groundStruct.bType = ground->Name();
@@ -187,21 +151,13 @@ void FDTinyXML2::groundNodeToArray(XMLElement *ground,CCArray *&array)
         while (NULL != curAttribute) {
             
             if (strncmp(curAttribute->Name(), XML_POSX,strlen(XML_POSX)) == 0)  {
-                
                 groundStruct.posx = atof(curAttribute->Value());
-                
             }else if (strncmp(curAttribute->Name(), XML_POSY,strlen(XML_POSY)) == 0)
-                
             {
-                
                 groundStruct.posy = atof(curAttribute->Value());
-                
             }else if (strncmp(curAttribute->Name(), XML_FLAG,strlen(XML_FLAG)) == 0)
-                
             {
-                
                 groundStruct.flag = atoi(curAttribute->Value());
-                
             }
             
             obj->setGroundBarrier(groundStruct);
@@ -238,23 +194,14 @@ void FDTinyXML2::eleNodeToArray(tinyxml2::XMLElement *ele, cocos2d::CCArray *&ar
         obj = TempObject::create();
         
         while (NULL != curAttribute) {
-            
             if (strncmp(curAttribute->Name(), XML_POSX,strlen(XML_POSX)) == 0) {
-                
                 eleStruct.posx = atof(curAttribute->Value());
-                
             }else if (strncmp(curAttribute->Name(), XML_POSY, strlen(XML_POSY)) == 0)
-                
             {
-                
                 eleStruct.posy = atof(curAttribute->Value());
-                
             }else if (strncmp(curAttribute->Name(), XML_FLAG, strlen(XML_FLAG)) == 0)
-                
             {
-                
                 eleStruct.flag = atoi(curAttribute->Value());
-                
             }
             
             obj->setEleBarrier(eleStruct);
