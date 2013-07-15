@@ -74,7 +74,28 @@ public:
              SimpleAudioEngine::sharedEngine()->playEffect( std::string(CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(pszFilePath)).c_str() );
         }
 	}
+	
+    static float getFloatForKey(const char* pKey)
+    {
+        std::string key = pKey;
+        key = SaveData(reinterpret_cast<const unsigned char*>(key.c_str()), key.length());
+        std::string data = CCUserDefault::sharedUserDefault()->getStringForKey(pKey);
+        data = ParseData(data);
+        CCString *str = CCString::create(data);
+        return str->floatValue();
+    }
     
+    static void setFloatForKey(const char* pKey, float value)
+    {
+        char buffer[50];
+        sprintf(buffer,"%f",value);
+        std::string data = buffer;
+        std::string key = pKey;
+        data = SaveData(reinterpret_cast<const unsigned char*>(data.c_str()), data.length());
+        key = SaveData(reinterpret_cast<const unsigned char*>(key.c_str()),key.length());
+        CCUserDefault::sharedUserDefault()->setStringForKey(pKey, data);
+        CCUserDefault::sharedUserDefault()->flush();
+    }
     
     static int getIntegerForKey(const char* pKey)
     {
