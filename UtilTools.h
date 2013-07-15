@@ -67,13 +67,12 @@ public:
 
     }
 
-	static void playEffect( const char* pszFilePath )
-	{
-        
-        if (getIntegerForKey(XML_EFFECT_STATUS)) {
-             SimpleAudioEngine::sharedEngine()->playEffect( std::string(CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(pszFilePath)).c_str() );
-        }
-	}
+    static void playEffect( const char* pszFilePath )
+    { 
+       if (getIntegerForKey(XML_EFFECT_STATUS)) {
+            SimpleAudioEngine::sharedEngine()->playEffect( std::string(CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(pszFilePath)).c_str() );
+       }
+    }
 	
     static float getFloatForKey(const char* pKey)
     {
