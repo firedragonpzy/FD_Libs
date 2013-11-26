@@ -36,7 +36,7 @@ public:
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
     }
     
-    static void playBackgroundMusic(const char* pszFilePath,bool bLoop)
+    static void playAnotherBackgroundMusic(const char* pszFilePath,bool bLoop)
     {
          SimpleAudioEngine::shareEngine()->stopBackgroundMusic();
          MusicManager::playBackgroundMusic(pszFilePath, bLoop);
