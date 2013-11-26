@@ -31,7 +31,7 @@ public:
     // about music and effect
     static void playBackgroundMusic(const char* pszFilePath,bool bLoop)
     {
-        SimpleAudioEngine::shareEngine()->playBackgroundMusic(pszFilePath);
+        SimpleAudioEngine::shareEngine()->playBackgroundMusic(pszFilePath,bLoop);
         MusicManager::sm_cCurMusic = pszFilePath;
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
     }
