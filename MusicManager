@@ -78,7 +78,7 @@ public:
     
     static void stopBackgroundMusic()
     {
-        SimpleAudioEngine::shareEngine()->resumeBackgroundMusic();
+        SimpleAudioEngine::shareEngine()->stopBackgroundMusic();
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDFALSE);
     }
     
