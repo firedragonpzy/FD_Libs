@@ -13,9 +13,7 @@
 #include "cocos-ext.h"
 USING_NS_CC;
 USING_NS_CC_EXT;
-#include "UtilTools.h"
-#include "MainGameURLayer.h"
-#include "ToyMenuSprite.h"
+
 class FDScrollView : public CCScrollView{
 public:
     static FDScrollView* create(CCSize size, CCNode* container = NULL);
