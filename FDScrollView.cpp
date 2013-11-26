@@ -171,20 +171,7 @@ void FDScrollView::ccTouchMoved(CCTouch* touch, CCEvent* event)
             if (tempScale < 0.5f) {
                 tempScale = 0.5f;
             }
-            UtilTools::gameScale = tempScale;
-            MainGameURLayer *layer =(MainGameURLayer*) CCDirector::sharedDirector()->getRunningScene()->getChildByTag(KTAG_GAME_UR_LAYER);
-            if (layer->getToysArray()->count() > 0) {
-                ToyMenuSprite *sprite = (ToyMenuSprite*)layer->getToysArray()->objectAtIndex(0);
-                sprite->setScale(tempScale);
-            }
-            ToyMenuSprite *tonsSprite = layer->getTongsSprite();
-            if (tonsSprite) {
-                tonsSprite->setScale(tempScale);
-            }
-            ToyMenuSprite* tempToySprite = (ToyMenuSprite*)layer->getTempToySprite();
-            if (tempToySprite) {
-                tempToySprite->setScale(tempScale);
-            }
+         
             this->setZoomScale(tempScale);
         }
     }
