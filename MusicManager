@@ -24,7 +24,7 @@ public:
     
 private:
     // about music and effect
-    static const chaar *sm_cCurMusic;
+    static const char *sm_cCurMusic;
     
     
 public:
