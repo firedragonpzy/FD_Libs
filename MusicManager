@@ -7,11 +7,11 @@
 //
 //
 
-#include "SimpleAudioEngine.h"
-#include "UtilTools/UtilTools.h"
-
 #ifndef Runner__MusicManager__h
 #define Runner__MusicManager__h
+
+#include "SimpleAudioEngine.h"
+#include "UtilTools/UtilTools.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
