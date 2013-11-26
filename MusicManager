@@ -59,7 +59,7 @@ public:
         if(MusicManager::s_bIsMusicPlaying)
         {
             SimpleAudioEngine::shareEngine()->resumeBackgroundMusic();
-            UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDFALSE);
+            UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
         }else
         {
             MusicManager::playBackgroundMusic(MusicManager::sm_cCurMusic, true);
