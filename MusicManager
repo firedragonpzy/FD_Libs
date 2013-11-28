@@ -24,7 +24,7 @@ public:
     
 private:
     // about music and effect
-    static const char *sm_cCurMusic;
+    static char *sm_cCurMusic;
     
     
 public:
@@ -32,7 +32,7 @@ public:
     static void playBackgroundMusic(const char* pszFilePath,bool bLoop)
     {
         SimpleAudioEngine::sharedEngine()->playBackgroundMusic(pszFilePath,bLoop);
-        MusicManager::sm_cCurMusic = pszFilePath;
+        MusicManager::sm_cCurMusic = const_cast<char*>(pszFilePath);
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
     }
     
