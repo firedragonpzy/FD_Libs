@@ -11,7 +11,7 @@
 #define Runner__MusicManager__h
 
 #include "SimpleAudioEngine.h"
-#include "UtilTools/UtilTools.h"
+#include "../UtilTools/UtilTools.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -31,34 +31,34 @@ public:
     // about music and effect
     static void playBackgroundMusic(const char* pszFilePath,bool bLoop)
     {
-        SimpleAudioEngine::shareEngine()->playBackgroundMusic(pszFilePath,bLoop);
+        SimpleAudioEngine::sharedEngine()->playBackgroundMusic(pszFilePath,bLoop);
         MusicManager::sm_cCurMusic = pszFilePath;
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
     }
     
     static void playAnotherBackgroundMusic(const char* pszFilePath,bool bLoop)
     {
-         SimpleAudioEngine::shareEngine()->stopBackgroundMusic();
+         SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
          MusicManager::playBackgroundMusic(pszFilePath, bLoop);
     } 
     
     static void pauseBackgroundMusic()
     {
-        SimpleAudioEngine::shareEngine()->pauseBackgroundMusic();
+        SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDFALSE);
         MusicManager::s_bIsMusicPlaying = true;
     }
     
     static void pauseBackgroundMusicForEnterBackground()
     {
-        SimpleAudioEngine::shareEngine()->pauseBackgroundMusic();
+        SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
     }
     
     static void resumeBackgroundMusic()
     {
         if(MusicManager::s_bIsMusicPlaying)
         {
-            SimpleAudioEngine::shareEngine()->resumeBackgroundMusic();
+            SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
             UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDTRUE);
         }else
         {
@@ -72,13 +72,13 @@ public:
      {
         if(UtilTools::getIntegerForKey(XML_MUSIC_STATUS))
         {
-            SimpleAudioEngine::shareEngine()->resumeBackgroundMusic();
+            SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
         }
      }
     
     static void stopBackgroundMusic()
     {
-        SimpleAudioEngine::shareEngine()->stopBackgroundMusic();
+        SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
         UtilTools::setIntegerForKey(XML_MUSIC_STATUS,FDFALSE);
     }
     
@@ -86,7 +86,7 @@ public:
     {
         if(UtilTools::getIntegerForKey(XML_EFFECT_STATUS))
         {
-            SimpleAudioEngine::shareEngine()->playEffect(pszFilePath);
+            SimpleAudioEngine::sharedEngine()->playEffect(pszFilePath);
         }
     }
 };
